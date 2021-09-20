@@ -1,0 +1,58 @@
+<div>
+  <button onclick="draw()">Trazar</button>
+  <button onclick="rotarTrazar(1)">Girar Rec 1</button>
+  <button onclick="rotarTrazar(2)">Girar Rec 2</button>
+  
+</div>
+
+<canvas id='canvas' height=200/>
+<script type="text/javascript">
+var ctx = document.getElementById('canvas').getContext('2d');
+
+function deg2rad(g){
+ return  (Math.PI / 180) * g;
+
+}
+
+function rect(x, y, w, h, c){
+
+  ctx.fillStyle = c;
+  ctx.fillRect(x, y, w, h);
+}
+
+function rotarCuadrado(x, y, w, h, g){
+	x1= x + (0.5 * w);
+	y1= y + (0.5 * h);
+	ctx.translate(x1, y1);
+	ctx.rotate(deg2rad(g));
+	ctx.translate(-x1, -y1);
+}
+
+function rotarTrazar(n){
+  if(n==1){
+  	ctx.save();
+	
+	rect(30, 30, 100, 100, '#FF00BD' );
+	rotarCuadrado(30, 30, 100, 100,-45);
+	rect(30, 30, 100, 100, '#AA00FF' );
+	ctx.restore();
+  }else 
+	if(n==2){
+  	ctx.save();
+	rect(150, 30, 100, 100, '#FF00BD' );
+	rotarCuadrado(150, 30, 100, 100, 60);
+  	rect(150, 30, 100, 100, '#AA00FF' );
+	ctx.restore();
+  }
+}
+
+function draw() {
+ ctx.save();
+    rect(0, 0, 300, 400, '#FF00BD' );
+  rect(30, 30, 100, 100, '#AA00FF' );  
+  rect(150, 30, 100, 100, '#AA00FF' );
+  ctx.restore();
+}
+
+
+</script>
